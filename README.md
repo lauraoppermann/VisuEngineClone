@@ -13,23 +13,27 @@ Coming soon
 Units are the heart of the VisuEngine. They live in /renderer/units. The are responsible for rendering the JSON data in a way you want it. A unit consists of the following components:
 
 ### Basic Structure
-Directory | Usage
-/         | Root directory for all your files (feel free to create new directories)
-/unit.json| Describes the unit (required)
-/res      | Directory for public available resources like HTML files (optional)
+|Directory |                                 Usage                                   |
+|----------|-------------------------------------------------------------------------|
+|/         | Root directory for all your files (feel free to create new directories) |
+|/unit.json| Describes the unit (required)                                           |
+|/res      | Directory for public available resources like HTML files (optional)     |
 
 
 ### unit.json
 Units must provide the following unit.json structure:
 
+```json
 {
   "cmd" : "myrenderer"
 }
+```
 
-JSON key  |   Usage
-cmd       | is the command that gets executed in the unit's root directory
+|JSON key  |                              Usage                             |
+|----------|----------------------------------------------------------------|
+|cmd       | is the command that gets executed in the unit's root directory |
 
-Note: Basically you could pass custom command line arguments to your programm but if you do that you have to adjust the command line argument processing shown in the example below (which is not very difficult)
+**Note: Basically you could pass custom command line arguments to your programm but if you do that you have to adjust the command line argument processing shown in the example below (which is not very difficult)**
 
 ### How does a unit receive its data / what to return
 
@@ -67,14 +71,16 @@ print(result)
 Plugins are also an important part of the VisuEngine because they can manipulate the data flow. They live in /plugins/. So they are a great starting point for adding new features eg. the html2image plugin converts the results being plain html from units to images. A plugin has the following structure:
 
 ### Basic Structure
-Directory | Usage
-/         | Root directory for all your files (feel free to create new directories)
-/plugin.json| Describes the unit (required)
-/res      | Directory for public available resources like HTML files (optional)
+| Directory   |                                 Usage                                   |
+|-------------|-------------------------------------------------------------------------|
+|/            | Root directory for all your files (feel free to create new directories) |
+|/plugin.json | Describes the unit (required)                                           |
+|/res         | Directory for public available resources like HTML files (optional)     |
 
 ### plugin.json
 Plugins must provide the following plugin.json structure:
 
+```json
 {
   "subscribe" : {
       "before_database" : "myrenderer before_db",
@@ -83,15 +89,17 @@ Plugins must provide the following plugin.json structure:
       "after_renderer" : "myrenderer after_renderer"
   }
 }
+```
 
-JSON key  |   Usage
-before_database       | is the command that gets executed in the plugin's root directory before database request (optional)
-after_database       | is the command that gets executed in the plugin's root directory after database request (optional)
-before_renderer       | is the command that gets executed in the plugin's root directory before data gets rendered by unit (optional)
-after_renderer       | is the command that gets executed in the plugin's root directory after data got rendered by unit (optional)
+|JSON key              |                                                Usage                                                 |
+|----------------------|------------------------------------------------------------------------------------------------------|
+|before_database       | is the command that gets executed in the plugin's root directory before database request (optional)  |
+|after_database        | is the command that gets executed in the plugin's root directory after database request (optional)   |
+|before_renderer       | is the command that gets executed in the plugin's root directory before data gets rendered by unit (optional)|
+|after_renderer        | is the command that gets executed in the plugin's root directory after data got rendered by unit (optional)|
 
 
-Note: As you can see you can pass custom arguments to your commands in plugin.json which is nessecary to distinguish between different subscriptions like in the example.
+**Note: As you can see you can pass custom arguments to your commands in plugin.json which is nessecary to distinguish between different subscriptions like in the example.**
 
 ### How does a plugin receive its data / what to return
 Coming soon
