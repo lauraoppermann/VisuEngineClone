@@ -88,7 +88,7 @@ Plugins must provide the following plugin.json structure:
   "subscribe" : {
       "before_database" : {
           "cmd"  : "myrenderer",
-          "args" : ["before_db]
+          "args" : ["before_db"]
       },
       "after_database" : {
           "cmd"  : "myrenderer",
@@ -96,7 +96,7 @@ Plugins must provide the following plugin.json structure:
       },
       "before_renderer" : {
           "cmd"  : "myrenderer",
-          "args" : ["before_renderer]
+          "args" : ["before_renderer"]
       },
       "after_database" : {
           "cmd"  : "myrenderer"
