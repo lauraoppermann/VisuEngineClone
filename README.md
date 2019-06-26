@@ -25,13 +25,16 @@ Units must provide the following unit.json structure:
 
 ```json
 {
-  "cmd" : "myrenderer"
+  "cmd" : "myrenderer",
+  "args" : ["param1", "2", "important"]
 }
 ```
 
-|JSON key  |                              Usage                             |
-|----------|----------------------------------------------------------------|
-|cmd       | is the command that gets executed in the unit's root directory |
+|JSON key  |                                    Usage                                  |
+|----------|---------------------------------------------------------------------------|
+|cmd       | is the command that gets executed in the unit's root directory (required  |
+|args      | array of command line arguments getting passed to the unit (optional)     |
+
 
 **Note: Basically you could pass custom command line arguments to your programm but if you do that you have to adjust the command line argument processing shown in the example below (which is not very difficult)**
 
@@ -83,20 +86,39 @@ Plugins must provide the following plugin.json structure:
 ```json
 {
   "subscribe" : {
-      "before_database" : "myrenderer before_db",
-      "after_database" : "myrenderer after_db",
-      "before_renderer" : "myrenderer",
-      "after_renderer" : "myrenderer after_renderer"
+      "before_database" : {
+          "cmd"  : "myrenderer",
+          "args" : ["before_db]
+      },
+      "after_database" : {
+          "cmd"  : "myrenderer",
+          "args" : ["after_db"]
+      },
+      "before_renderer" : {
+          "cmd"  : "myrenderer",
+          "args" : ["before_renderer]
+      },
+      "after_database" : {
+          "cmd"  : "myrenderer"
+      }
   }
 }
 ```
 
 |JSON key              |                                                Usage                                                 |
 |----------------------|------------------------------------------------------------------------------------------------------|
-|before_database       | is the command that gets executed in the plugin's root directory before database request (optional)  |
-|after_database        | is the command that gets executed in the plugin's root directory after database request (optional)   |
-|before_renderer       | is the command that gets executed in the plugin's root directory before data gets rendered by unit (optional)|
-|after_renderer        | is the command that gets executed in the plugin's root directory after data got rendered by unit (optional)|
+|before_database           | is the object containing information for the before_database event (optional)                    |
+|before_database.cmd       | is the command that gets executed in the plugin's root directory before database request (optional)  |
+|before_database.args      | is the list of command line arguments getting passed to the plugin (optional)                    |
+|after_database           | is the object containing information for the after_database event (optional)                    |
+|after_database.cmd       | is the command that gets executed in the plugin's root directory after database request (optional)  |
+|after_database.args      | is the list of command line arguments getting passed to the plugin (optional)                    |
+|before_renderer           | is the object containing information for the before_renderer event (optional)                    |
+|before_renderer.cmd       | is the command that gets executed in the plugin's root directory before renderer request (optional)  |
+|before_renderer.args      | is the list of command line arguments getting passed to the plugin (optional)                    |
+|after_renderer           | is the object containing information for the after_renderer event (optional)                    |
+|after_renderer.cmd       | is the command that gets executed in the plugin's root directory after renderer request (optional)  |
+|after_renderer.args      | is the list of command line arguments getting passed to the plugin (optional)                    |
 
 
 **Note: As you can see you can pass custom arguments to your commands in plugin.json which is nessecary to distinguish between different subscriptions like in the example.**
