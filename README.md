@@ -29,7 +29,7 @@ A unit has a small interface. It's only one function with the following signatur
 | template  | string containing the the template that shall be used to present the data |
 | unitHomeDir | string containing the absolute path to the unit's root which you need for file i/o |
 
-Return Value: absolute file path to the result of rendering
+Return Value: absolute file path to the result of rendering of type **String**
 
 #### Example unit.js
 
@@ -92,13 +92,30 @@ A plugin can implement up to 4 functions to extend the functionality of the Visu
 | before_renderer |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:x:|:heavy_check_mark:|
 | after_renderer |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
 
-Return Value: Boolean
+Return Value: Boolean, if true the further request handling of VisuEngine is skipped
+
+| Parameter | Info |
+|-----------|------|
+| req       | express req object |
+| res       | express res object |
+| database  | database object see Database section |
+| chartId   | integer of chartId |
+| jsonData  | string containing the data to save / chart to render |
+| renderer  | renderer object see Renderer section |
+| unit      | string containing unit name |
+| template  | string containing the the template that shall be used to present the data |
+| rendererResult | string containing absolute file path to the renderer result file |
+| pluginHomeDir | string containing the absolute path to the plugin's root which you need for file i/o |
+
+**Note: returning true in before_database / before_renderer will also skip your after_database / after_renderer!**
 
 #### Example plugin.js
 
 ```js
 
-
+function my_before_database(req, res, database, chartId, jsonData, renderer, pluginHomeDir) {
+	res.status(500).send("No database today")
+}
 
 // export your plugin functions
 module.exports = {
