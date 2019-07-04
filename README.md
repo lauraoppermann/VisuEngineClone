@@ -86,7 +86,7 @@ Plugins are also an important part of the VisuEngine because they can manipulate
 A plugin can implement up to 4 functions to extend the functionality of the VisuEngine. The functions have the following signature:
 
 | Function        | req | res | database | chartId | jsonData | renderer | unit | template | rendererResult | pluginHomeDir |
-|-----------------|-----|-----|----------|---------|----------|----------|------|----------|----------------|---------------|
+|-----------------|:---:|-----|:--------:|---------|----------|----------|------|----------|----------------|---------------|
 | before_database |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:|:x:|:heavy_check_mark:|
 | after_database  |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:|:x:|:heavy_check_mark:|                |               |
 | before_renderer |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:x:|:heavy_check_mark:|
