@@ -69,7 +69,7 @@ module.exports = myunit
 ```
 
 ### How To Use Your Unit
-Put your unit directory into /renderer/units and it will be automatically loaded on server start. Then you can use your unit by calling the following unit: http://<hostname>:<port>/chart/<chartId>?unit=**<your unit>**&template=**<some template handled by your unit>**
+Put your unit directory into /renderer/units and it will be automatically loaded on server start. Then you can use your unit by calling the following unit: http://<hostname>:<port>/chart/<chartId>?unit=<your unit>&template=<some template handled by your unit>
 
 ## Plugin
 Plugins are also an important part of the VisuEngine because they can manipulate the data flow. They live in /plugins/. So they are a great starting point for adding new features eg. the html2image plugin converts the results being plain html from units to images. A plugin has the following structure:
@@ -150,4 +150,4 @@ module.exports = {
 ```
 
 ### How To Use Your Plugin
-Put your unit directory into /renderer/units and it will be automatically loaded on server start. Then you can use your unit by calling the following unit: http://<hostname>:<port>/chart/<chartId>?unit=<unit>&template=<template>&plugin=**<your plugin>**
+Put your unit directory into /renderer/units and it will be automatically loaded on server start. Then you can use your unit by calling the following unit: http://<hostname>:<port>/chart/<chartId>?unit=<unit>&template=<template>&plugin=<your plugin>
