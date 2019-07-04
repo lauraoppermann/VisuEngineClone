@@ -150,4 +150,4 @@ module.exports = {
 ```
 
 ### How To Use Your Plugin
-Put your unit directory into /renderer/units and it will be automatically loaded on server start. Then you can use your unit by calling the following unit: http://<hostname>:<port>/chart/<chartId>?unit=<unit>&template=<template>&plugin**<your plugin>**
+Put your unit directory into /renderer/units and it will be automatically loaded on server start. Then you can use your unit by calling the following unit: http://<hostname>:<port>/chart/<chartId>?unit=<unit>&template=<template>&plugin=**<your plugin>**
