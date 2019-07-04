@@ -94,9 +94,9 @@ A plugin can implement up to 4 functions to extend the functionality of the Visu
 
 Return Value: Boolean, if true the further request handling of VisuEngine is skipped
 
-| Parameter | Info |
-|-----------|------|
-| req       | express req object |
+| Parameter | Info | Further Documentation |
+|-----------|------|-----------------------|
+| req       | express req object | [https://expressjs.com/de/api.html#req] https://expressjs.com/de/api.html#req |
 | res       | express res object |
 | database  | database object see Database section |
 | chartId   | integer of chartId |
