@@ -96,25 +96,47 @@ Return Value: Boolean, if true the further request handling of VisuEngine is ski
 
 | Parameter | Info | Further Documentation |
 |-----------|------|-----------------------|
-| req       | express req object | [https://expressjs.com/de/api.html#req] https://expressjs.com/de/api.html#req |
-| res       | express res object |
-| database  | database object see Database section |
-| chartId   | integer of chartId |
-| jsonData  | string containing the data to save / chart to render |
-| renderer  | renderer object see Renderer section |
-| unit      | string containing unit name |
-| template  | string containing the the template that shall be used to present the data |
-| rendererResult | string containing absolute file path to the renderer result file |
-| pluginHomeDir | string containing the absolute path to the plugin's root which you need for file i/o |
+| req       | express req object | https://expressjs.com/de/api.html#req |
+| res       | express res object | https://expressjs.com/de/api.html#res |
+| database  | database object see Database section | Coming Soon |
+| chartId   | integer of chartId | |
+| jsonData  | string containing the data to save / chart to render | |
+| renderer  | renderer object see Renderer section | Coming Soon |
+| unit      | string containing unit name | |
+| template  | string containing the the template that shall be used to present the data | |
+| rendererResult | string containing absolute file path to the renderer result file | |
+| pluginHomeDir | string containing the absolute path to the plugin's root which you need for file i/o | |
 
 **Note: returning true in before_database / before_renderer will also skip your after_database / after_renderer!**
 
 #### Example plugin.js
 
 ```js
+const fs = require("fs")
+const path = require("path")
 
 function my_before_database(req, res, database, chartId, jsonData, renderer, pluginHomeDir) {
 	res.status(500).send("No database today")
+	
+	// skip further database actions
+	return true
+}
+
+function my_after_database(req, res, database, chartId, jsonData, renderer, pluginHomeDir) {
+	// save json to file
+	let filepath = path.require(pluginHomeDir, "lastJson.data")
+	fs.writeFileSync(filepath, jsonData)
+	
+	// don't change anything
+	return false
+}
+
+function my_before_renderer(req, res, database, chartId, renderer, unit, template, pluginHomeDir) {
+	// Your code
+}
+
+function my_after_renderer(req, res, database, chartId, renderer, unit, template, rendererResult, pluginHomeDir) {
+	// Your code
 }
 
 // export your plugin functions
