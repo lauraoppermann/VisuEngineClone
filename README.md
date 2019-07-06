@@ -29,7 +29,7 @@ A unit has a small interface. It's only one function with the following signatur
 | template  | string containing the the template that shall be used to present the data |
 | unitHomeDir | string containing the absolute path to the unit's root which you need for file i/o |
 
-Return Value: absolute file path to the result of rendering
+Return Value: absolute file path to the result of rendering of type **String**
 
 #### Example unit.js
 
@@ -69,7 +69,7 @@ module.exports = myunit
 ```
 
 ### How To Use Your Unit
-Put your unit directory into /renderer/units and it will be automatically loaded on server start. Then you can use your unit by calling the following unit: http://<hostname>:<port>/chart/<chartId>?unit=**<your unit>**&template=**<some template handled by your unit>**
+Put your unit directory into /renderer/units and it will be automatically loaded on server start. Then you can use your unit by calling the following url: http://hostname:port/chart/<chartId>?unit=your unit&template=some template handled by your unit
 
 ## Plugin
 Plugins are also an important part of the VisuEngine because they can manipulate the data flow. They live in /plugins/. So they are a great starting point for adding new features eg. the html2image plugin converts the results being plain html from units to images. A plugin has the following structure:
@@ -86,19 +86,58 @@ Plugins are also an important part of the VisuEngine because they can manipulate
 A plugin can implement up to 4 functions to extend the functionality of the VisuEngine. The functions have the following signature:
 
 | Function        | req | res | database | chartId | jsonData | renderer | unit | template | rendererResult | pluginHomeDir |
-|-----------------|-----|-----|----------|---------|----------|----------|------|----------|----------------|---------------|
+|-----------------|:---:|:---:|:--------:|:-------:|:--------:|:--------:|:----:|:--------:|:--------------:|:-------------:|
 | before_database |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:|:x:|:heavy_check_mark:|
 | after_database  |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:x:|:x:|:x:|:heavy_check_mark:|                |               |
 | before_renderer |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:x:|:heavy_check_mark:|
 | after_renderer |:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|:heavy_check_mark:|
 
-Return Value: Boolean
+Return Value: Boolean, if true the further request handling of VisuEngine is skipped
+
+| Parameter | Info | Further Documentation |
+|-----------|------|-----------------------|
+| req       | express req object | https://expressjs.com/de/api.html#req |
+| res       | express res object | https://expressjs.com/de/api.html#res |
+| database  | database object see Database section | Coming Soon |
+| chartId   | integer of chartId | |
+| jsonData  | string containing the data to save / chart to render | |
+| renderer  | renderer object see Renderer section | Coming Soon |
+| unit      | string containing unit name | |
+| template  | string containing the the template that shall be used to present the data | |
+| rendererResult | string containing absolute file path to the renderer result file | |
+| pluginHomeDir | string containing the absolute path to the plugin's root which you need for file i/o | |
+
+**Note: returning true in before_database / before_renderer will also skip your after_database / after_renderer!**
 
 #### Example plugin.js
 
 ```js
+const fs = require("fs")
+const path = require("path")
 
+function my_before_database(req, res, database, chartId, jsonData, renderer, pluginHomeDir) {
+	res.status(500).send("No database today")
+	
+	// skip further database actions
+	return true
+}
 
+function my_after_database(req, res, database, chartId, jsonData, renderer, pluginHomeDir) {
+	// save json to file
+	let filepath = path.require(pluginHomeDir, "lastJson.data")
+	fs.writeFileSync(filepath, jsonData)
+	
+	// don't change anything
+	return false
+}
+
+function my_before_renderer(req, res, database, chartId, renderer, unit, template, pluginHomeDir) {
+	// Your code
+}
+
+function my_after_renderer(req, res, database, chartId, renderer, unit, template, rendererResult, pluginHomeDir) {
+	// Your code
+}
 
 // export your plugin functions
 module.exports = {
@@ -111,4 +150,4 @@ module.exports = {
 ```
 
 ### How To Use Your Plugin
-Put your unit directory into /renderer/units and it will be automatically loaded on server start. Then you can use your unit by calling the following unit: http://<hostname>:<port>/chart/<chartId>?unit=<unit>&template=<template>&plugin**<your plugin>**
+Put your unit directory into /pluginmanager/plugins and it will be automatically loaded on server start. Then you can use your plugin by calling the following url: http://hostname:port/chart/<chartId>?unit=unit&template=template&plugin=your plugin
