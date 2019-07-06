@@ -20,9 +20,9 @@ class PluginManager {
         plugins.forEach((plugin) => {
             
             let pluginPath = path.join(CONSTANTS.PLUGIN_PATH, plugin, "/plugin.js")
-            console.log("Loaded", pluginPath)
             result[plugin] = require(pluginPath)
             
+            console.log("Loaded Plugin:", plugin)
         })
         
         return result
@@ -36,25 +36,11 @@ class PluginManager {
         
         // check if the plugin exists and can handle the action
         if (!this.pluginExists(plugin) || this.plugins[plugin][action] == undefined) {
-            console.log(plugin, "cant handle action", action)
             return false
         }
         
         let pluginHomeDir = path.join(CONSTANTS.PLUGIN_PATH, plugin)
         let handle = false
-        
-        console.log("Plugin", plugin)
-        console.log("Action", action)
-        //console.log(req)
-        //console.log(res)
-        //console.log(database)
-        console.log("ChartId", chartId)
-        console.log("JsonData", jsonData)
-        //console.log(renderer)
-        console.log("Unit", unit)
-        console.log("Template", template)
-        console.log("RendererResult", rendererResult)
-        console.log("PluginHomeDir", pluginHomeDir)
         
         // run the given plugin
         switch (action) {

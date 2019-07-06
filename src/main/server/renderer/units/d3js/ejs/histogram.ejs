@@ -25,6 +25,16 @@ body {
 <script src="/unit/d3js/libs/d3.v3.min.js"></script>
 <script>
 var chart = <%- chart %>
+if (!chart.width) {
+    chart.width = 500
+}
+if (!chart.height) {
+    chart.height = 500
+}
+    
+if (!chart.buckets) {
+    chart.buckets = 5
+}
     
 var color = "steelblue";
 

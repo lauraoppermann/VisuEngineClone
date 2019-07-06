@@ -5,7 +5,6 @@ const fs = require("fs")
 
 function render(chartJson, template, unitHomeDir) {
     
-    const DEFAULT_RESULT = path.join(unitHomeDir, "default.html")
     const RESULT_FILE = path.join(unitHomeDir, "result.html")
 
     // select ejs

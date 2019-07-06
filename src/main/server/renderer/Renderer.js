@@ -19,7 +19,7 @@ class Renderer {
         // iterate over units and parse information
         units.forEach((unit) => {
             let unitPath = path.join(CONSTANTS.UNIT_PATH, unit, "/unit.js")
-            console.log("Loaded", unitPath)
+            console.log("Loaded Unit:", unit)
             result[unit] = require(unitPath)
         })
         

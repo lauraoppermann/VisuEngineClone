@@ -30,6 +30,7 @@ class Database {
         chartJson.id = this.nextChartId
         this.db.push("/charts/" + this.nextChartId, chartJson)
         this.nextChartId++
+        return this.nextChartId - 1
     }
     
     set(chartId, chartJson) {
