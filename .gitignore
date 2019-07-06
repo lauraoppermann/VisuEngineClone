@@ -1,6 +1,6 @@
-src/main/server/node_modules/
-src/main/server/package-lock.json
-src/main/server/renderer/units/
-!src/main/server/renderer/units/README.md
-src/main/server/pluginmanager/plugins/
-!src/main/server/pluginmanager/plugins/README.md
+src/node_modules/
+src/package-lock.json
+src/renderer/units/
+!src/renderer/units/README.md
+src/pluginmanager/plugins/
+!src/pluginmanager/plugins/README.md
