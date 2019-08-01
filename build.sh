@@ -1,12 +1,5 @@
 #!/bin/bash
 
-# Check user
-if [ $(whoami) != "root" ]
-then
-echo "Run as root!"
-exit
-fi
-
 # Check requirements
 NPM=$(which npm)
 PKG=$(which pkg)
