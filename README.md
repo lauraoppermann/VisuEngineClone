@@ -151,3 +151,34 @@ module.exports = {
 
 ### How To Use Your Plugin
 Put your unit directory into /pluginmanager/plugins and it will be automatically loaded on server start. Then you can use your plugin by calling the following url: http://hostname:port/chart/<chartId>?unit=unit&template=template&plugin=your plugin
+
+
+## External Libraries
+If you want to use external libraries in your unit.js / plugin.js like in our example unit (fancy-lib) you simply have to execute the following command in the /src directory of the VisuEngine:
+```bash
+npm install <library name>
+```
+
+## Binary Version
+If you want to VisuEngine as a binary you can cross compile it using the build.sh script. You have to execute the following command in the projects root directory:
+```bash
+./build.sh
+```
+
+Requirements:
+- nodejs
+- pkg
+
+Tested on Ubuntu 16.04 x64.
+
+If build was successful you have a bin directory including 3 binaries for Linux, Mac, Windows. Furthermore you have a plugins and units directory where you can place your wanted units / plugins.
+
+### External Libraries
+If you want to use external libraries in your unit.js / plugin.js like in our example unit (fancy-lib) you simply have to execute the following command in the /bin directory of the VisuEngine:
+```bash
+npm install <library name>
+```
+
+After compiling VisuEngine and installing external libraries you can copy the /bin directory's content wherever you want. 
+
+**But make sure to copy everything wanted binaries + plugins folder + units folder + node_modules folder**
