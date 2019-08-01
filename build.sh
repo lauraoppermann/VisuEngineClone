@@ -26,14 +26,9 @@ fi
 
 # Prepare Project
 echo "Delete existing plugins"
-rm -Rf ./src/pluginmanager/plugins/*
-
-echo "Delete existing units"
-rm -Rf ./src/renderer/units/*
-
-echo "Move plugin folder and unit folder to project root"
-mv ./src/pluginmanager/plugins ./
-mv ./src/renderer/units ./
+mkdir ./bin
+mkdir ./bin/plugins
+mkdir ./bin/units
 
 # Modify Constants
 echo "Rewrite Constants"
@@ -45,5 +40,12 @@ mv ./src/Constants.js.rewrite ./src/Constants.js
 
 # Build Binary
 echo "Build binary"
-mkdir bin
-pkg ./src -o ./bin
+pkg ./src -o ./bin/visuengine
+
+# Restore Constants
+echo "Restoring Constants.js..."
+mv ./src/Constants.js.old ./src/Constants.js
+echo "Done!"
+
+# Done
+echo "Build successfully"
