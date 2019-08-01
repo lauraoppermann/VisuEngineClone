@@ -19,7 +19,12 @@ function deleteChartById(database, renderer, pluginManager) {
         // delete chart
         database.delete(req.params.chartId)
         
-        res.send("Deleted Chart!")
+        // run post database plugin and return if plugin handles request
+        if (pluginManager.run(plugin, CONSTANTS.AFTER_DB_ACTION, req, res, database, chartId, null, renderer, null, null, null)) {
+            return
+        }
+        
+        res.send("OK")
     }
 }
 
@@ -34,7 +39,13 @@ function deleteAll(database, renderer, pluginManager) {
         }
         
         database.deleteAll()
-        res.send("Deleted All!")
+        
+        // run post database plugin and return if plugin handles request
+        if (pluginManager.run(plugin, CONSTANTS.AFTER_DB_ACTION, req, res, database, chartId, null, renderer, null, null, null)) {
+            return
+        }
+        
+        res.send("OK")
     }
 }
 

@@ -15,15 +15,15 @@ function getChartById(database, renderer, pluginManager) {
             return
         }
         
-        // check if unit and template are given otherwise return error message
-        if (!unit || !template) {
-            res.status(404).send("Please provide unit and template!")
-            return
-        }
-        
         // check if the chart exists otherwise return error message
         if (!database.exists(req.params.chartId)) {
             res.status(404).send("Chart not found!")
+            return
+        }
+        
+        // check if unit and template are given otherwise return error message
+        if (!unit || !template) {
+            res.status(404).send("Please provide unit and template!")
             return
         }
         

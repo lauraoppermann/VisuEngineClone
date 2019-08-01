@@ -11,6 +11,7 @@ const AFTER_DB_ACTION = "after_database"
 const BEFORE_RENDERER_ACTION = "before_renderer"
 const AFTER_RENDERER_ACTION = "after_renderer"
 
+// debug messages
 console.log("CONSTANTS")
 console.log(APP_ROOT)
 console.log(UNIT_PATH)
