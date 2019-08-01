@@ -1,7 +1,8 @@
 const path = require("path")
+const process = require("process")
 
 // path constants
-const APP_ROOT = __dirname
+const APP_ROOT = path.dirname(process.argv[1])
 const UNIT_PATH = path.join(APP_ROOT, "renderer/units/")
 const PLUGIN_PATH = path.join(APP_ROOT, "pluginmanager/plugins")
 

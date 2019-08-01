@@ -30,6 +30,12 @@ function getChartById(database, renderer, pluginManager) {
         // run renderer
         let result = renderer.render(unit, template, database.get(req.params.chartId))
         
+        // unit not found
+        if (!result) {
+            res.status(404).send("Please provide a valid unit")
+            return
+        }
+        
         // run post renderer plugin and return if plugin handles request
         if (pluginManager.run(plugin, CONSTANTS.AFTER_RENDERER_ACTION, req, res, database, req.params.chartId, null, renderer, unit, template, result)) {
             return
