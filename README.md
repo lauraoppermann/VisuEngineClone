@@ -5,7 +5,14 @@ Framework to use arbitary visualization tools on every platform / in every progr
 I want to use Frameworks like D3.js, plot.ly, matplotlib while programming in Java, Rust or Go. So what do those programming languages have incommon? They have more or less nice networking and json libraries. So in the future there is no more to do than sending your data as a json object to the VisuEngine and you will receive a beautiful visualization as HTML, Image or whatever you can imagine so the only task you have to to is save it in a file.
 
 #Architecture
-Coming soon
+
+## Classes
+Basically VisuEngine consists of 4 classes: Server, PluginManager, Renderer, Database. Their relation looks like this:
+![alt text](https://github.com/uniflo/VisuEngine/blob/master/docs/classes.jpg)
+
+## Basic Data Flow Model
+![alt text](https://github.com/uniflo/VisuEngine/blob/master/docs/architecture.jpg)
+(not translated yet)
 
 # Specs
 
