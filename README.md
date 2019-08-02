@@ -159,6 +159,14 @@ If you want to use external libraries in your unit.js / plugin.js like in our ex
 npm install <library name>
 ```
 
+## Database
+### Disable Persistence
+To disable persistance you have to change the 2nd parameter in database constructor to false. The constructor can be found in Database.js and looks like that originally:
+```js
+this.db = new JsonDB(new JsonDBConfig(dbName, true, false, "/"))
+```
+Further database documentation can be found here https://www.npmjs.com/package/node-json-db.
+
 ## Binary Version
 If you want to VisuEngine as a binary you can cross compile it using the build.sh script. You have to execute the following command in the projects root directory:
 ```bash
