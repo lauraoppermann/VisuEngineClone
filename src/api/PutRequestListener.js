@@ -7,7 +7,7 @@ function modifyChart(database, renderer, pluginManager) {
         let plugin = req.query.plugin
         
         // run pre database plugin and return if plugin handles request
-        if (pluginManager.run(plugin, CONSTANTS.BEFORE_DB_ACTION, req, res, database, req.params.chartId, null, renderer, null, null, null)) {
+        if (pluginManager.run(plugin, CONSTANTS.BEFORE_DB_ACTION, req, res, database, chartId, req.body, renderer, null, null, null)) {
             return
         }
         
@@ -21,7 +21,7 @@ function modifyChart(database, renderer, pluginManager) {
         database.set(chartId, req.body)
         
         // run post database plugin and return if plugin handles request
-        if (pluginManager.run(plugin, CONSTANTS.AFTER_DB_ACTION, req, res, database, chartId, null, renderer, null, null, null)) {
+        if (pluginManager.run(plugin, CONSTANTS.AFTER_DB_ACTION, req, res, database, chartId, req.body, renderer, null, null, null)) {
             return
         }
         
