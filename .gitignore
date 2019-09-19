@@ -1,3 +1,6 @@
 src/node_modules/
 src/package-lock.json
 src/ChartDatabase.json
+src/renderer/units/d3js
+src/pluginmanager/plugins/html2image
+bin
