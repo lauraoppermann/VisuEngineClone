@@ -30,7 +30,7 @@ class Renderer {
         return Object.keys(this.units).includes(unit)
     }
 
-    render(unit, template, chartJson) {
+    render(unit, template, chartJson, chartId) {
         if (!this.unitExists(unit)) {
             return false
         }
@@ -38,7 +38,7 @@ class Renderer {
         let unitHomeDir = path.join(CONSTANTS.UNIT_PATH, unit)
 
         // run unit and return result
-        return this.units[unit](chartJson, template, unitHomeDir)
+        return this.units[unit](chartJson, template, unitHomeDir, chartId)
     }
 
 }

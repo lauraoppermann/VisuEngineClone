@@ -41,8 +41,7 @@ function modifyChart(database, renderer, pluginManager) {
         }
 
         // append data to current chart
-        database.set(chartId, req.body)
-        // database[chartId] = req.body
+        database.add(chartId, req.body)
 
         // run post database plugin and return if plugin handles request
         if (pluginManager.run(plugin, CONSTANTS.AFTER_DB_ACTION, req, res, database, chartId, req.body, renderer, null, null, null)) {

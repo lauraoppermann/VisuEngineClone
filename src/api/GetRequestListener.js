@@ -28,7 +28,7 @@ function getChartById(database, renderer, pluginManager) {
         }
 
         // run renderer
-        let result = renderer.render(unit, template, database.get(req.params.chartId))
+        let result = renderer.render(unit, template, database.get(req.params.chartId), req.params.chartId)
 
         // unit not found
         if (!result) {
